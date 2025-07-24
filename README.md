@@ -1,4 +1,5 @@
-antes de tudo: eu nao me considero nenhum tipo de desenvolvedor, só identifico problrmas, vejo uma solução usando automação ou codigo, e a parte suja de escrever os grosso do codigo eu deixo isso pra I.A, sempre tem uns erros aqui e ali, mas é só saber ler que isso eu mesmo resolvo, de resto tem umas partes comentadas no codigo(era pra ter apagado, mas acabei subindo assim mesmo , foda-se)
+(nao quero ser DEV, nem sei porque to subindo isso no git)
+Antes de tudo: não me considero nenhum devzao, Meu lance é sacar os BOs, bolar uma solução usando automação ou uns codigos, e a parte "bruta" de escrever o grosso da parada?isso ai eu deixo pra IA. Sempre rola uns errinhos aqui e ali, mas é só saber ler que eu mesmo ajeito, De resto, tem uns pedaços comentados no código (era pra ter apagado, mas subi assim mesmo, foda-se 🤷‍♂️)
 
 # PROJETO ASSISTENCIA TECNICA - SoftGateE ai, beleza? Esse aqui é o repo do Projeto Assistencia Tecnica, a ferramenta **incrivel** q fiz pra gerenciar uma assistencia tecnica, feita com Python e SQLite no back-end e um front-end web (q ta sendo feito, mas ja funciona o basico!).
 
