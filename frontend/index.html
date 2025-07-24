@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoftGate - Clientes e OS</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>SoftGate - Sistema de Assistência Técnica</h1>
+    </header>
+
+    <main>
+        <section id="lista-clientes">
+            <h2>Lista de Clientes</h2>
+            <button id="btn-recarregar-clientes">Recarregar Clientes</button>
+            <div class="lista-container" id="clientes-container">
+                <p>Carregando clientes...</p>
+            </div>
+        </section>
+
+        <section id="cadastro-cliente">
+            <h2>Cadastrar Novo Cliente</h2>
+            <form id="form-cadastro-cliente">
+                <div class="form-group">
+                    <label for="tipoPessoa">Tipo de Pessoa:</label>
+                    <select id="tipoPessoa" name="tipo_pessoa" required>
+                        <option value="">Selecione</option>
+                        <option value="PF">Pessoa Física</option>
+                        <option value="PJ">Pessoa Jurídica</option>
+                    </select>
+                </div>
+
+                <div id="camposPF" class="hidden">
+                    <div class="form-group">
+                        <label for="nomePF">Nome:</label>
+                        <input type="text" id="nomePF" name="nome">
+                    </div>
+                    <div class="form-group">
+                        <label for="cpfPF">CPF (somente números):</label>
+                        <input type="text" id="cpfPF" name="cpf" maxlength="11" pattern="\d{11}" title="Apenas 11 dígitos numéricos">
+                    </div>
+                    <div class="form-group">
+                        <label for="dataNascimentoPF">Data de Nascimento:</label>
+                        <input type="date" id="dataNascimentoPF" name="data_nascimento">
+                    </div>
+                </div>
+
+                <div id="camposPJ" class="hidden">
+                    <div class="form-group">
+                        <label for="razaoSocialPJ">Razão Social:</label>
+                        <input type="text" id="razaoSocialPJ" name="razao_social">
+                    </div>
+                    <div class="form-group">
+                        <label for="cnpjPJ">CNPJ (somente números):</label>
+                        <input type="text" id="cnpjPJ" name="cnpj" maxlength="14" pattern="\d{14}" title="Apenas 14 dígitos numéricos">
+                    </div>
+                    <div class="form-group">
+                        <label for="responsavelPJ">Nome do Responsável:</label>
+                        <input type="text" id="responsavelPJ" name="responsavel">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="whatsapp">WhatsApp (somente números, ex: 5511987654321):</label>
+                    <input type="tel" id="whatsapp" name="whatsapp" required pattern="\d+">
+                </div>
+                
+                <button type="submit">Cadastrar Cliente</button>
+            </form>
+            <p id="mensagem-feedback" class="feedback-message"></p>
+        </section>
+
+        <section id="lista-oss">
+            <h2>Ordens de Serviço</h2>
+            <button id="btn-recarregar-oss">Recarregar OSs</button>
+            <div class="lista-container" id="oss-container">
+                <p>Carregando Ordens de Serviço...</p>
+            </div>
+        </section>
+
+        <section id="abertura-os">
+            <h2>Abrir Nova Ordem de Serviço</h2>
+            <form id="form-abrir-os"> <div class="form-group">
+                    <label for="osClienteId">ID do Cliente:</label>
+                    <input type="number" id="osClienteId" name="cliente_id" required>
+                </div>
+                <div class="form-group">
+                    <label for="tipoEquipamento">Tipo de Equipamento:</label>
+                    <input type="text" id="tipoEquipamento" name="tipo_equipamento" required>
+                </div>
+                <div class="form-group">
+                    <label for="descricaoProblema">Descrição do Problema:</label>
+                    <textarea id="descricaoProblema" name="descricao_problema" rows="3"></textarea>
+                </div>
+
+               <h3>Checklist Inicial: <span id="loading-checklist" style="font-size: 0.9em; color: #666;"></span></h3>
+                <div id="checklist-container">
+                    <p>Digite o tipo de equipamento para carregar o checklist.</p>
+                </div>
+                
+                <button type="submit">Abrir OS</button>
+            </form>
+            <p id="mensagem-feedback-os" class="feedback-message"></p>
+        </section>
+
+        <section id="detalhes-os" class="hidden">
+            <h2>Detalhes da Ordem de Serviço <span id="os-id-detalhe"></span></h2>
+            <div id="os-detalhes-conteudo">
+                </div>
+            <h3>Atualizar Status</h3>
+            <div class="form-group">
+                <label for="novoStatusOS">Novo Status:</label>
+                <select id="novoStatusOS" name="novo_status" required>
+                    <option value="">Selecione um status</option>
+                    <option value="Em aberto">Em aberto</option>
+                    <option value="Aguardando aprovação">Aguardando aprovação</option>
+                    <option value="Aprovado">Aprovado</option>
+                    <option value="Aguardando peças">Aguardando peças</option>
+                    <option value="Na bancada">Na bancada</option>
+                    <option value="Em testes">Em testes</option>
+                    <option value="Serviço concluído">Serviço concluído</option>
+                    <option value="Serviço pronto">Serviço pronto</option>
+                    <option value="Aguardando pagamento">Aguardando pagamento</option>
+                    <option value="Abandonado">Abandonado</option>
+                    <option value="Retorno com garantia">Retorno com garantia</option>
+                    <option value="Retorno sem garantia">Retorno sem garantia</option>
+                    <option value="Finalizando">Finalizando</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="obsTecnicoOS">Observações do Técnico (opcional):</label>
+                <textarea id="obsTecnicoOS" rows="2"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="garantiaOS">Garantia (opcional, ex: 90 dias, 1 ano):</label>
+                <input type="text" id="garantiaOS">
+            </div>
+            <button id="btn-atualizar-status-os">Atualizar Status</button>
+            <button id="btn-voltar-os-list" class="btn-secondary">Voltar para a Lista</button>
+            <p id="mensagem-feedback-status-os" class="feedback-message"></p>
+        </section>
+<section id="lista-produtos">
+            <h2>Catálogo de Produtos</h2>
+            <button id="btn-recarregar-produtos">Recarregar Produtos</button>
+            <div class="lista-container" id="produtos-container">
+                <p>Carregando produtos...</p>
+            </div>
+        </section>
+
+        <section id="form-produto">
+            <h2>Gerenciar Produto</h2>
+            <form id="form-cadastro-produto">
+                <input type="hidden" id="produtoId" name="id"> <div class="form-group">
+                    <label for="nomeProduto">Nome do Produto:</label>
+                    <input type="text" id="nomeProduto" name="nome" required>
+                </div>
+                <div class="form-group">
+                    <label for="descricaoProduto">Descrição:</label>
+                    <textarea id="descricaoProduto" name="descricao" rows="2"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="precoProduto">Preço:</label>
+                    <input type="number" id="precoProduto" name="preco" step="0.01" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="estoqueProduto">Estoque:</label>
+                    <input type="number" id="estoqueProduto" name="estoque" min="0" required>
+                </div>
+                <button type="submit" id="btn-salvar-produto">Cadastrar Produto</button>
+                <button type="button" id="btn-cancelar-produto" class="btn-secondary hidden">Cancelar Edição</button>
+            </form>
+            <p id="mensagem-feedback-produto" class="feedback-message"></p>
+        </section>
+
+        <section id="lista-servicos">
+            <h2>Catálogo de Serviços</h2>
+            <button id="btn-recarregar-servicos">Recarregar Serviços</button>
+            <div class="lista-container" id="servicos-container">
+                <p>Carregando serviços...</p>
+            </div>
+        </section>
+
+        <section id="form-servico">
+            <h2>Gerenciar Serviço</h2>
+            <form id="form-cadastro-servico">
+                <input type="hidden" id="servicoId" name="id"> <div class="form-group">
+                    <label for="nomeServico">Nome do Serviço:</label>
+                    <input type="text" id="nomeServico" name="nome" required>
+                </div>
+                <div class="form-group">
+                    <label for="descricaoServico">Descrição:</label>
+                    <textarea id="descricaoServico" name="descricao" rows="2"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="precoServico">Preço:</label>
+                    <input type="number" id="precoServico" name="preco" step="0.01" min="0" required>
+                </div>
+                <button type="submit" id="btn-salvar-servico">Cadastrar Serviço</button>
+                <button type="button" id="btn-cancelar-servico" class="btn-secondary hidden">Cancelar Edição</button>
+            </form>
+            <p id="mensagem-feedback-servico" class="feedback-message"></p>
+        </section>
+    </main>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
